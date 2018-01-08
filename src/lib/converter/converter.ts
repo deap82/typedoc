@@ -355,9 +355,9 @@ export class Converter extends ChildableComponent<Application, ConverterComponen
     private compile(context: Context): ts.Diagnostic[] {
         const program = context.program;
 
-        const appDirectory = this.compilerHost.currentDirectory;        
+        const appDirectory = this.compilerHost.getCurrentDirectory();
         program.getSourceFiles().forEach((sourceFile) => {
-            if(!Path.isAbsolute(sourceFile.fileName)) {
+            if (!Path.isAbsolute(sourceFile.fileName)) {
               sourceFile.fileName = normalizePath(_ts.normalizeSlashes(Path.join(appDirectory, sourceFile.fileName)));
             }
             this.convertNode(context, sourceFile);
